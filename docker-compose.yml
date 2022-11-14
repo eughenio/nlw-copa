@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  fastify:
+    image: node:18.12
+    ports:
+      - 3333:3333
+      - 5555:5555
+    volumes:
+      - ./:/opt/nlw
+    working_dir: /opt/nlw/server
+    networks:
+      - nlw
+    command: npm run dev
+  
+  next:
+    image: node:18.12
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/opt/nlw
+    working_dir: /opt/nlw/web
+    networks:
+      - nlw
+    command: npm run dev
+
+networks:
+  nlw:
+    driver: bridge
